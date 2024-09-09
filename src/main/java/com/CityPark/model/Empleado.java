@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
-import org.springframework.data.annotation.ReadOnlyProperty;
 
 @Getter
 @Setter

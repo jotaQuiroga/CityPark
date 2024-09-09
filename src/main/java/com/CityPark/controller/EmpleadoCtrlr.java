@@ -1,9 +1,7 @@
 package com.CityPark.controller;
 
 import com.CityPark.exception.ResourceNotFoundException;
-import com.CityPark.model.Cargo;
 import com.CityPark.model.Empleado;
-import com.CityPark.repository.CargoRpo;
 import com.CityPark.repository.EmpleadoRpo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

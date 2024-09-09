@@ -4,6 +4,7 @@ import com.CityPark.exception.ResourceNotFoundException;
 import com.CityPark.model.Atraccion;
 import com.CityPark.repository.AtraccionRpo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,9 +44,8 @@ public class AtraccionCtrlr {
             upDateAtraccion.setDescripcion(atraccionDetails.getDescripcion());
         if (atraccionDetails.getClasificacion()!= null)
             upDateAtraccion.setClasificacion(atraccionDetails.getClasificacion());
-
-        //aquí va algo de cascada? según entidad atracción
-
+        if (atraccionDetails.getCondicionUsoSet()!= null)
+            upDateAtraccion.setCondicionUsoSet(atraccionDetails.getCondicionUsoSet());
         if (atraccionDetails.getEstado()!= null)
             upDateAtraccion.setEstado(atraccionDetails.getEstado());
         if (atraccionDetails.getMantenimiento()!= null)
@@ -55,6 +55,16 @@ public class AtraccionCtrlr {
         atraccionRpo.save(upDateAtraccion);
 
         return ResponseEntity.ok(upDateAtraccion);
+    }
+    @DeleteMapping("{id_atrac}")
+    public ResponseEntity<HttpStatus> deleteAcudiente(@PathVariable int id_atrac) throws ResourceNotFoundException {
+        Atraccion deleteAtraccion = atraccionRpo.findById(id_atrac)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario not exist with id_Usuario: " + id_atrac));
+
+        atraccionRpo.delete(deleteAtraccion);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
     }
 }
 

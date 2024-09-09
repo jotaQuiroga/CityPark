@@ -2,9 +2,7 @@ package com.CityPark.controller;
 
 import com.CityPark.exception.ResourceNotFoundException;
 import com.CityPark.model.Acudiente;
-import com.CityPark.model.Usuario;
 import com.CityPark.repository.AcudienteRpo;
-import com.CityPark.repository.UsuarioRpo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +24,7 @@ public class AcudienteCtrlr {
     }
 
 
-    @GetMapping("{id_Acu}")
+    @GetMapping("{id_Acudiente}")
     public ResponseEntity<Acudiente> getAcudienteById(@PathVariable int id_Acudiente) throws ResourceNotFoundException {
         Acudiente acudiente = acudienteRpo.findById(id_Acudiente)
                 .orElseThrow(() -> new ResourceNotFoundException("Acudiente not exist with id_Acudiente:" + id_Acudiente));
@@ -37,35 +35,40 @@ public class AcudienteCtrlr {
     public Acudiente createAcudiente(@RequestBody Acudiente acudiente) {
         return acudienteRpo.save(acudiente);
     }
-/*
+
     @PutMapping("{id_acu}")
-    public ResponseEntity<Usuario> updateAcudiente(@PathVariable int id_acu,@RequestBody Usuario usuarioDetails) throws ResourceNotFoundException {
-        Usuario updateUsuario = acudienteRpo.findById(id_Usuario)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario not exist with id_Usuario: " + id_Usuario));
+    public ResponseEntity<Acudiente> updateAcudiente(@PathVariable int id_acu,@RequestBody Acudiente acudienteDetails) throws ResourceNotFoundException {
+        Acudiente updateAcudiente = acudienteRpo.findById(id_acu)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario not exist with id_Usuario: " + id_acu));
 
-        updateUsuario.setNombre(usuarioDetails.getNombre());
-        updateUsuario.setApellido(usuarioDetails.getApellido());
-        updateUsuario.setCedula(usuarioDetails.getCedula());
-        updateUsuario.setEdad(usuarioDetails.getEdad());
-        updateUsuario.setEstatura(usuarioDetails.getEstatura());
-        updateUsuario.setDireccion(usuarioDetails.getDireccion());
-        updateUsuario.setTelefono(usuarioDetails.getTelefono());
-        updateUsuario.setCorreo_electronico(usuarioDetails.getCorreo_electronico());
-        updateUsuario.setNumero_visitas(usuarioDetails.getNumero_visitas());
+        if (acudienteDetails.getUsuario()!= null)
+            updateAcudiente.setUsuario(acudienteDetails.getUsuario());
+        if (acudienteDetails.getCedula_Acu() != null)
+            updateAcudiente.setCedula_Acu(acudienteDetails.getCedula_Acu());
+        if (acudienteDetails.getNombre_Acu() != null)
+            updateAcudiente.setNombre_Acu(acudienteDetails.getNombre_Acu());
+        if (acudienteDetails.getApellido_Acu() != null)
+            updateAcudiente.setApellido_Acu(acudienteDetails.getApellido_Acu());
+        if (acudienteDetails.getTelefono() != null)
+            updateAcudiente.setTelefono(acudienteDetails.getTelefono());
+        if (acudienteDetails.getDireccion() != null)
+            updateAcudiente.setDireccion(acudienteDetails.getDireccion());
+        if (acudienteDetails.getCorreo_elec_Acu() != null)
+            updateAcudiente.setCorreo_elec_Acu(acudienteDetails.getCorreo_elec_Acu());
 
-        usuarioRpo.save(updateUsuario);
+        acudienteRpo.save(updateAcudiente);
 
-        return ResponseEntity.ok(updateUsuario);
+        return ResponseEntity.ok(updateAcudiente);
     }
 
-    @DeleteMapping("{id_Usu}")
-    public ResponseEntity<HttpStatus> deleteUsuario(@PathVariable int id_Usuario) throws ResourceNotFoundException {
-        Usuario usuario = usuarioRpo.findById(id_Usuario)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario not exist with id_Usuario: " + id_Usuario));
+    @DeleteMapping("{id_Acu}")
+    public ResponseEntity<HttpStatus> deleteAcudiente(@PathVariable int id_Acu) throws ResourceNotFoundException {
+        Acudiente deleteAcudiente = acudienteRpo.findById(id_Acu)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario not exist with id_Usuario: " + id_Acu));
 
-        usuarioRpo.delete(usuario);
+        acudienteRpo.delete(deleteAcudiente);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-    }*/
+    }
 }

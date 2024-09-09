@@ -24,7 +24,7 @@ public class UsuarioCtrlr {
     }
 
 
-    @GetMapping("{id_Usu}")
+    @GetMapping("{id_Usuario}")
     public ResponseEntity<Usuario> getUsuarioById(@PathVariable int id_Usuario) throws ResourceNotFoundException {
         Usuario usuario = usuarioRpo.findById(id_Usuario)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no existe con id_Usuario:" + id_Usuario));
@@ -36,7 +36,7 @@ public class UsuarioCtrlr {
         return usuarioRpo.save(usuario);
     }
 
-    @PutMapping("{id_Usu}")
+    @PutMapping("{id_Usuario}")
     public ResponseEntity<Usuario> updateUsuario(@PathVariable int id_Usuario,@RequestBody Usuario usuarioDetails) throws ResourceNotFoundException {
         Usuario updateUsuario = usuarioRpo.findById(id_Usuario)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not exist with id_Usuario: " + id_Usuario));
@@ -56,7 +56,7 @@ public class UsuarioCtrlr {
         return ResponseEntity.ok(updateUsuario);
     }
 
-    @DeleteMapping("{id_Usu}")
+    @DeleteMapping("{id_Usuario}")
     public ResponseEntity<HttpStatus> deleteUsuario(@PathVariable int id_Usuario) throws ResourceNotFoundException {
         Usuario usuario = usuarioRpo.findById(id_Usuario)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not exist with id_Usuario: " + id_Usuario));

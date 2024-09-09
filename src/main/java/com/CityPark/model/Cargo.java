@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.*;
-import org.springframework.data.annotation.ReadOnlyProperty;
+
 
 @Getter
 @Setter
@@ -13,6 +13,7 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 @AllArgsConstructor
 @Entity
 @Table(name = "CARGO")
+
 
 public class Cargo {
 
